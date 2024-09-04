@@ -1,6 +1,7 @@
 'use strict';
 
-emailjs.init('7Yl7bQ7W4Nv2Dlipe');  // Your public_key
+// Initialize EmailJS with your public key
+emailjs.init('7Yl7bQ7W4Nv2Dlipe');
 
 // Element toggle function
 const elementToggleFunc = function (elem) {
@@ -110,8 +111,9 @@ form.addEventListener('submit', function(event) {
             btnText.innerText = 'Send Email';
             alert('Sent!');
         }, (err) => {
+            console.log(err);  // Log the error details for debugging
             btnText.innerText = 'Send Email';
-            alert(JSON.stringify(err));
+            alert('Failed to send email. Please try again later.');
         })
         .finally(() => {
             document.querySelector('[name="fullname"]').value = "";
@@ -139,13 +141,8 @@ navigationLinks.forEach(link => {
     });
 });
 
-// Visitor count and right-click disable functionality
+// Disable right-click functionality
 document.addEventListener('DOMContentLoaded', function () {
-    let counter = localStorage.getItem('visitCount');
-    counter = counter ? parseInt(counter) + 1 : 1;
-    localStorage.setItem('visitCount', counter);
-    document.getElementById('visitorCount').innerText = 'Visitor Count: ' + counter;
-
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
     });
